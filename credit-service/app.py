@@ -91,6 +91,7 @@ def getdata():
   return {'email':user['email'], 'withdraw':user['withdraw'], 'creditlimit':user['creditlimit'], 'balance':user['creditlimit'] - user['withdraw']}
 
 
+
 @app.route('/getPersonalData', methods=['POST'])
 def getPersonalData():
   print('getpersonaldata')
@@ -98,6 +99,22 @@ def getPersonalData():
   _email = _json['email']
   user = mongo.db.users.find_one({"email":_email})
   return {'firstname':user['firstname'], 'lastname':user['lastname']}
+
+
+@app.route('/getTransactions', methods=['POST'])
+def getTransactions():
+  print('getTransactions')
+  _json = request.json
+  _email = _json['email']
+  res =[]
+  transactions = mongo.db.transactions.find({"email":_email})
+  for t in transactions:
+    _trans = {
+      'amount':t['amount'],
+      'action': t['action']
+    }
+    res.append(_trans)
+  return jsonify(res)
 
 
 @app.route('/updateData', methods=['POST'])
