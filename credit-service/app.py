@@ -6,12 +6,13 @@ from bson.json_util import dumps
 from bson.objectid import ObjectId
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_cors import CORS
+import dns
 
 app = Flask(__name__)
 CORS(app, support_credentials=True)
 
 app.config['MONGO_DBNAME'] = 'credit-service'
-app.config['MONGO_URI'] = 'mongodb://localhost:27017/credit-service'
+app.config['MONGO_URI'] = 'mongodb+srv://credit_user:credit%401990@cluster0-4xpye.mongodb.net/test?retryWrites=true&w=majority'
 
 mongo = PyMongo(app)
 
@@ -47,10 +48,9 @@ def add_user():
 
 @app.route('/addTransaction', methods=['POST'])
 def add_transaction():
-  _newjson = request.json
+  _json = request.json
   print("function is called")
-  print(_newjson)
-  '''
+  print(_json)
   _firstname = _json['firstname']
   _email = _json['email']
   _lastname = _json['lastname']
@@ -64,7 +64,7 @@ def add_transaction():
     return resp
   else:
     return "Not found"
-'''
+
 
 @app.route('/getUserData', methods=['POST'])
 def getuserdata():
@@ -93,6 +93,7 @@ def getdata():
 
 @app.route('/getPersonalData', methods=['POST'])
 def getPersonalData():
+  print('getpersonaldata')
   _json = request.json
   _email = _json['email']
   user = mongo.db.users.find_one({"email":_email})
@@ -102,22 +103,25 @@ def getPersonalData():
 @app.route('/updateData', methods=['POST'])
 def update_user():
   _json = request.json
+  print(_json)
   _email = _json['email']
   _amount = int(_json['amount'])
+  #print(_json)
   user = mongo.db.users.find_one({"email": _email})
-  if user is not None and _email and request.method == 'PUT':
+  #print(user)
+  if user is not None and _email and request.method == 'POST':
     if user['creditlimit'] - user['withdraw'] - _amount > 0:
         _total_amount = user['withdraw']+ _amount
         user['withdraw'] = _total_amount
         print(_total_amount)
-        # mongo.db.users.update_one({'email': _email},
-        #                          {'$set': {"withdraw":_total_amount}}, upsert=False)
-        mongo.db.users.update_one(user)
+        mongo.db.users.update_one({'email': _email},
+                                 {'$set': {"withdraw":_total_amount}}, upsert=False)
+        #mongo.db.users.update_one(user)
     else:
         return "Limit Exceed"
     resp = jsonify('User updated successfully!')
     resp.status_code = 200
-    print(resp)
+    #print(resp)
     return resp
   else:
     return not_found()
