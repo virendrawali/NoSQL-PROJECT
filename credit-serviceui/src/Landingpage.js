@@ -34,7 +34,7 @@ export default class LandingPage extends Component {
     return (
       <>
         <div id="style-1" style={{ overflowY:'scroll'}} >
-          <header className="masthead text-white text-center"  style={{backgroundImage:"../img/credit.jpeg"}}>
+          <header className="masthead text-white text-center"  style={{backgroundImage:"../img/credit1.jpeg"}}>
             <div className="overlay" />
             <div className="container-fluid">
             <div className="row">
@@ -76,9 +76,9 @@ export default class LandingPage extends Component {
                     <div className="features-icons-icon d-flex">
                       <i className="icon-check m-auto text-primary" />
                     </div>
-                    <h3>Easy Pay</h3>
+                    <h3>Easy Pay</h3>   
                     <p className="lead mb-0">
-                    Pay easily convinietly.
+                    Pay conviniently.
                     </p>
                   </div>
                 </div>
