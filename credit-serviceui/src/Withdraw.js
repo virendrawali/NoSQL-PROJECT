@@ -21,7 +21,6 @@ class Withdraw extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    //debugger;
     this.withdraw();
   };
   withdraw() {
