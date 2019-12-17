@@ -144,7 +144,7 @@ def update_user():
     return not_found()
 
 
-@app.route('/payAmount', methods=['PUT'])
+@app.route('/payAmount', methods=['POST'])
 def payAmount():
   _json = request.json
   _email = _json['email']
