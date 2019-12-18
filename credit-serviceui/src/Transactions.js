@@ -15,7 +15,7 @@ class Transaction extends Component {
       email: localStorage.getItem("currentUser")
     };
     axios
-      .post("http://127.0.0.1:5000/getTransactions", rdata)
+      .post("http://silo.cs.indiana.edu:52473/getTransactions", rdata)
       .then(response => {
         debugger;
         this.setState({

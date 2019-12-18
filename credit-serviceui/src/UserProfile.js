@@ -50,7 +50,7 @@ class userprofile extends Component {
       email: localStorage.getItem("currentUser")
     };
     axios
-      .post("http://127.0.0.1:5000/getPersonalData", rdata)
+      .post("http://silo.cs.indiana.edu:52473/getPersonalData", rdata)
       .then(response => {
         debugger;
         this.setState({
@@ -77,7 +77,7 @@ class userprofile extends Component {
       income:this.state.income
     };
     axios
-      .post("http://127.0.0.1:5000/updateUserProfile", rdata)
+      .post("http://silo.cs.indiana.edu:52473/updateUserProfile", rdata)
       .then(response => {
         debugger;
         this.setState({
