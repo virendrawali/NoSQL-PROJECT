@@ -9,17 +9,22 @@ import Pay from "./Pay";
 
 import "./App.css";
 import Transaction from "./Transactions";
+import UserProfile from "./UserProfile"
+
 class App extends Component {
   render() {
     return (
+
       <>
         <Router>
           <Header />
+          <Route exact path="/" component={Home} />
           <Route exact path="/Home" component={Home} />
           <Route exact path="/Dashboard" component={Dashboard} />
           <Route exact path="/Withdraw" component={Withdraw} />
           <Route exact path="/Pay" component={Pay} />
           <Route exact path="/Transactions" component={Transaction} />
+          <Route exact path="/UserProfile" component={UserProfile} />
           {/*<Footer />*/}
         </Router>
       </>

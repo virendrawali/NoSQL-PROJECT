@@ -35,9 +35,11 @@ class Sidebar extends Component {
                 Transaction History
               </button>
             </Link>
-            <a href="#" class="list-group-item list-group-item-action bg-light">
+            <Link to={{ pathname: "/Userprofile" }}>
+            <button class="list-group-item list-group-item-action bg-light">
               User Profile
-            </a>
+            </button>
+            </Link>
           </div>
         </div>
       </>

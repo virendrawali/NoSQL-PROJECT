@@ -28,7 +28,7 @@ def add_user():
     _creditscore = _json['creditScore']
     _income = _json['income']
     _withdraw = 0
-    _creditlimit = 100000
+    _creditlimit = _income/3
     print(_password)
     user = mongo.db.users.find_one({"email": _email})
     if user is None and _firstname and _email and _password and request.method == 'POST':
@@ -98,7 +98,7 @@ def getPersonalData():
   _json = request.json
   _email = _json['email']
   user = mongo.db.users.find_one({"email":_email})
-  return {'firstname':user['firstname'], 'lastname':user['lastname']}
+  return {'firstname':user['firstname'], 'lastname':user['lastname'], 'contact':user['contact'], 'creditscore':user['creditscore'], 'income':user['income']}
 
 
 @app.route('/getTransactions', methods=['POST'])
@@ -136,6 +136,25 @@ def update_user():
         #mongo.db.users.update_one(user)
     else:
         return "Limit Exceed"
+    resp = jsonify('User updated successfully!')
+    resp.status_code = 200
+    #print(resp)
+    return resp
+  else:
+    return not_found()
+
+
+@app.route('/updateUserProfile', methods=['POST'])
+def update_user_profile():
+  _json = request.json
+  print(_json)
+  _email = _json['email']
+  _contact = int(_json['contact'])
+  _crediscore = int(_json['creditscore'])
+  _income = int(_json['income'])
+  user = mongo.db.users.find_one({"email": _email})
+  if user is not None and _email and request.method == 'POST':
+    mongo.db.users.update_one({'email': _email},{'$set': {"contact":_contact, "creditscore":_crediscore, "income":_income}}, upsert=False)
     resp = jsonify('User updated successfully!')
     resp.status_code = 200
     #print(resp)
