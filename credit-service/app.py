@@ -24,9 +24,9 @@ def add_user():
     _email = _json['email']
     _password = _json['pwd']
     _lastname = _json['lastName']
-    _contact = _json['contactNumber']
-    _creditscore = _json['creditScore']
-    _income = _json['income']
+    _contact = int(_json['contactNumber'])
+    _creditscore = int(_json['creditScore'])
+    _income = int(_json['income'])
     _withdraw = 0
     _creditlimit = _income/3
     print(_password)
