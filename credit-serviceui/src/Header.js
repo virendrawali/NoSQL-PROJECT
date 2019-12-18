@@ -101,7 +101,7 @@ class Header extends Component {
 
       return axios({
           method: 'post',
-          url: 'http://127.0.0.1:5000/getUserData',
+          url: 'http://silo.cs.indiana.edu:52473/getUserData',
           headers: {
             'Access-Control-Allow-Origin': '*'
           },
@@ -149,7 +149,7 @@ class Header extends Component {
 
       return axios({
           method: 'post',
-          url: 'http://127.0.0.1:5000/add',
+          url: 'http://silo.cs.indiana.edu:52473/add',
           headers: {
             'Access-Control-Allow-Origin': '*'
           },

@@ -19,7 +19,7 @@ class Dashboard extends Component {
   getData() {
     return axios({
       method: "post",
-      url: "http://127.0.0.1:5000/getData",
+      url: "http://silo.cs.indiana.edu:52473/getData",
       headers: { "Access-Control-Allow-Origin": "*" },
       data: {'email':localStorage.getItem('currentUser')}
     })

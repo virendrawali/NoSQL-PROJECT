@@ -33,10 +33,10 @@ class Withdraw extends Component {
       amount: parseInt(this.state.amount)
     };
     axios
-      .post("http://127.0.0.1:5000/updateData", rdata)
+      .post("http://silo.cs.indiana.edu:52473/updateData", rdata)
       .then(response => {
         axios
-          .post("http://127.0.0.1:5000/addTransaction", rdata)
+          .post("http://silo.cs.indiana.edu:52473/addTransaction", rdata)
           .then(response => {
             window.location.href = "/Dashboard";
           })
@@ -52,7 +52,7 @@ class Withdraw extends Component {
   getPersonalData() {
     axios({
       method: "post",
-      url: "http://127.0.0.1:5000/getPersonalData",
+      url: "http://silo.cs.indiana.edu:52473/getPersonalData",
       headers: { "Access-Control-Allow-Origin": "*" },
       data: { email: localStorage.getItem("currentUser") }
     })
